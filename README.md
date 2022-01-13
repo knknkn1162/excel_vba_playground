@@ -25,6 +25,7 @@ git clone https://github.com/knknkn1162/vba100_knock ./src
 wget https://github.com/knknkn1162/vba100_knock/releases/download/test/vba100_books.zip
 unzip ./vba100_books.zip -d ./src
 # install nkf and make in Windows. See in detail; https://github.com/knknkn1162/excel_vba_skeleton
+Start-Process powershell -Verb runAs
 choco source add -n kai2nenobu -s https://www.myget.org/F/kai2nenobu
 choco install -y nkf make
 ```
