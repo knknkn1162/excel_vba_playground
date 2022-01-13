@@ -35,7 +35,7 @@ You can import/run macro by bash or powershell:
 
 ```sh
 # import all macros into books
-make all-import # or `make import XLSM=ex001`
+make import-all # or `make import XLSM=ex001`
 # launch excel application and run macro automatically.
 ## choose xlsm book as you like.
 make run XLSM=ex001
