@@ -40,3 +40,20 @@ make import-all # or `make import XLSM=ex001`
 ## choose xlsm book as you like.
 make run XLSM=ex001
 ```
+
+## directories
+
++ omit ex003~ex100 for simplicity
+
+```
+proj
+├── books
+│   ├── ex001.xlsm
+│   ├── ex002.xlsm
+├── scripts
+├── src(this repo)
+│   ├── ex001
+│   ├── ex002
+├── templates
+└── vbac
+```
