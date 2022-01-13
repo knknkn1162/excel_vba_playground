@@ -8,7 +8,7 @@ Use [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skel
 
 1: git clone [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skeleton#macos)
 
-2: Get xlsm books
+2: Download xlsm books (Each book doesn't contiain macro)
 
 3: Git clone this repo
 
@@ -35,8 +35,8 @@ You can import/run macro by bash or powershell:
 
 ```sh
 # import all macros into books
-make import-vba100 # or `make run XLSM=./vba100/xlsms/ex001.xlsm`
+make all-import # or `make import XLSM=ex001`
 # launch excel application and run macro automatically.
 ## choose xlsm book as you like.
-make run XLSM=./vba100/xlsms/ex001.xlsm
+make run XLSM=ex001
 ```
