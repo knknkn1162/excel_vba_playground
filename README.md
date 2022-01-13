@@ -52,8 +52,8 @@ proj
 │   ├── ex002.xlsm
 ├── scripts
 ├── src(this repo)
-│   ├── ex001
-│   ├── ex002
+│   ├── ex001/Module1.bas
+│   ├── ex002/Module1.bas
 ├── templates
 └── vbac
 ```
