@@ -10,8 +10,8 @@ Use [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skel
 
 2: Get xlsm books
 3: Git clone this repo
-4-1: [Windows] Install `nkf` and `make`. See in detail; https://github.com/knknkn1162/excel_vba_skeleton#prerequisites
-4-2: [Mac OS] See https://github.com/knknkn1162/excel_vba_skeleton#macos
+4-1: \[Windows\] Install `nkf` and `make`. See in detail; https://github.com/knknkn1162/excel_vba_skeleton#prerequisites
+4-2: \[Mac OS\] See https://github.com/knknkn1162/excel_vba_skeleton#macos
 
 ```sh
 git clone --recursive https://github.com/knknkn1162/excel_vba_skeleton ./proj
