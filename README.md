@@ -4,7 +4,7 @@
 
 ## How to import/run macros
 
-Use [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skeleton#macos) tools:
+Use [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skeleton) tools:
 
 1: git clone [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skeleton#macos)
 
@@ -14,7 +14,7 @@ Use [knknkn1162/excel_vba_skeleton](https://github.com/knknkn1162/excel_vba_skel
 
 4-1: \[Windows\] Install `nkf` and `make`. See in detail; https://github.com/knknkn1162/excel_vba_skeleton#prerequisites
 
-4-2: \[Mac OS\] See https://github.com/knknkn1162/excel_vba_skeleton#macos
+4-2: \[Mac OS\] See the link; https://github.com/knknkn1162/excel_vba_skeleton#macos
 
 ```sh
 git clone --recursive https://github.com/knknkn1162/excel_vba_skeleton ./proj
