@@ -7,4 +7,4 @@ push: commit
 	git push
 commit:
 	git add $(XLSM)/
-	git commit -m "$(COMMIT_MSG) $(XLSM)"
+	git commit -m "$(COMMIT_MSG) macro in $(XLSM).xlsm"
