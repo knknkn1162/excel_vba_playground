@@ -10,6 +10,7 @@ Sub main()
     Dim chartObj As ChartObject
     Set chartObj = ActiveSheet.ChartObjects(1)
 
+    chartObj.Chart.SetSourceData Source:=Range("A1").CurrentRegion
     ' Reset
     With chartObj.Chart.SeriesCollection(1)
         .Interior.Color = RGB(68,114,196)
@@ -33,7 +34,11 @@ Sub main2()
 
     Dim maxVal As Integer, minVal As Integer
     Dim i As Integer
-    With ws.ChartObjects(1).Chart.SeriesCollection(1)
+    Dim cht As Chart
+    Set cht = ws.ChartObjects(1).Chart
+
+    cht.SetSourceData Source:=Range("A1").CurrentRegion
+    With cht.SeriesCollection(1)
         maxVal = WorksheetFunction.max(.Values)
         minVal = WorksheetFunction.min(.Values)
         .Interior.Color = RGB(68, 114, 196)
