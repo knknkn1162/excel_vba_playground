@@ -27,10 +27,15 @@ Sub main()
         Dim a1 As Integer, a2 As Integer
         Dim op As Integer
         Dim a As Integer
-        a1 = WorksheetFunction.RandBetween(10,99)
-        a2 = WorksheetFunction.RandBetween(10,a1)
-        op = WorksheetFunction.RandBetween(0,3)
-        a = Calc(a1,a2,op)
+        Do While True
+            a1 = WorksheetFunction.RandBetween(10,99)
+            a2 = WorksheetFunction.RandBetween(2,a1)
+            op = WorksheetFunction.RandBetween(0,3)
+            a = Calc(a1,a2,op)
+            If a <= 400 Then
+                Exit Do
+            End If
+        Loop
         Dim str As String
         str = Inputbox( _
             "第"  & i & "問: " & a1 & ops(op) & a2 &"= ?")
