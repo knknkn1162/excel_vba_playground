@@ -21,7 +21,6 @@ Sub main()
             Case vbSunday,vbSaturday
                 idx = 1
         End Select
-
         Dim n As Integer
         n = 0
         On Error Resume Next
