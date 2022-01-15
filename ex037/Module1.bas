@@ -1,34 +1,6 @@
 Option Explicit
 
 Sub main()
-    Dim rng As Range
-    Set rng = Range("A1").CurrentRegion.Columns("B")
-    Dim max As Long, min As Long
-    max = WorksheetFunction.match(WorksheetFunction.max(rng), rng, 0) - 1
-    min = WorksheetFunction.match(WorksheetFunction.min(rng), rng, 0) - 1
-
-    Dim chartObj As ChartObject
-    Set chartObj = ActiveSheet.ChartObjects(1)
-
-    chartObj.Chart.SetSourceData Source:=Range("A1").CurrentRegion
-    ' Reset
-    With chartObj.Chart.SeriesCollection(1)
-        .Interior.Color = RGB(68,114,196)
-        .ApplyDataLabels xlDataLabelsShowNone
-    End With
-
-    With chartObj.Chart.SeriesCollection(1).Points(min)
-        .Interior.Color = vbRed
-        .ApplyDataLabels
-    End With
-
-    With chartObj.Chart.SeriesCollection(1).Points(max)
-        .Interior.Color = vbGreen
-        .ApplyDataLabels
-    End With
-End Sub
-
-Sub main2()
     Dim ws As Worksheet
     Set ws = ActiveSheet
 
@@ -39,6 +11,8 @@ Sub main2()
 
     cht.SetSourceData Source:=Range("A1").CurrentRegion
     With cht.SeriesCollection(1)
+        ' We should consider the posibility that
+        ' two or more max candidates appear
         maxVal = WorksheetFunction.max(.Values)
         minVal = WorksheetFunction.min(.Values)
         .Interior.Color = RGB(68, 114, 196)
