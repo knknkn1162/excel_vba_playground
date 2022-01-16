@@ -37,7 +37,9 @@ Sub main2()
     End With
 
     Dim fpath As String
-    fpath = ws.Path & "/out.csv"
+    fpath = wb.Path & "/out.csv"
+    ' write as SHIFT_JIS encoding
+    ' In Linux, check with `nkf --ic=SHIFT_JIS out.csv`
     wb.SaveAs FileName:=fpath, FileFormat:=xlCSV
     wb.Close SaveChanges:=False
 End Sub
