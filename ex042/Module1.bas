@@ -29,9 +29,7 @@ Sub main()
         End If
         arr(pos) = Cells(i, pos)
         If pos = 4 Then
-            For j = 1 To 4
-                ws.Cells(db_row,j) = arr(j)
-            Next
+            ws.Cells(db_row, 1).Resize(,4) = arr
             db_row = db_row + 1
         End If
     Next
