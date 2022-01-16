@@ -25,3 +25,19 @@ Sub main()
     ' In Linux, check with `nkf --ic=SHIFT_JIS out.csv`
     Close #fd
 End Sub
+
+Sub main2()
+    Dim ws As Worksheet: Set ws = Activesheet
+    Dim wb As Workbook: Set wb = ActiveWorkbook
+    ws.Copy
+    With wb.Worksheets(1)
+        .Columns(1).NumberFormatLocal = "yyyy/mm/dd"
+        .Columns(2).NumberFormatLocal = "0"
+        .Columns(3).NumberFormatLocal = "0.00"
+    End With
+
+    Dim fpath As String
+    fpath = ws.Path & "/out.csv"
+    wb.SaveAs FileName:=fpath, FileFormat:=xlCSV
+    wb.Close SaveChanges:=False
+End Sub
