@@ -1,6 +1,8 @@
 Option Explicit
 
 Function Normalize(str As String) As String
+    ' See the link, https://docs.microsoft.com/en-us/office/vba/api/excel.worksheetfunction.clean
+    str = WorksheetFunction.Clean(str)
     Dim i As Integer
     For i = 1 To Len(str)
         Dim ch As String: ch = Mid(str,i,1)
@@ -20,6 +22,7 @@ Function Normalize(str As String) As String
             Case "a" To "z"
             Case StrConv("ー", vbNarrow)
             Case "-"
+            ' " !""#$%&'()*+,-./:;<=>?@[\]^`{|}~"
             Case Else
                 Mid(str,i,1) = "_"
                 GoTo Continue
@@ -39,13 +42,16 @@ Sub main()
         n = Normalize(rng.Resize(1,1).Value)
         On Error Resume Next
         Names.Add Name:=n, RefersTo:=rng.Address
+        Dim flag As Boolean: flag = True
         If Err.Number <> 0 Then
             Err.Clear
             On Error Resume Next
             Names.Add Name:="_"&n, RefersTo:=rng.Address
             If Err.Number <> 0 Then
                 Debug.Print "回避不可な文字列です:" & n
+                flag = False
             End If
         End If
     Next
+    If flag <> True Then Msgbox "名前定義に登録できない名前がありました。"
 End Sub
