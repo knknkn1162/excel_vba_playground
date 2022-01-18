@@ -54,6 +54,8 @@ End Sub
 Sub main2()
     Dim wsIn As Worksheet: Set wsIn = Worksheets("49In")
     Dim wsOut As Worksheet: Set wsOut = Worksheets("49Out")
+    ' header
+    wsOut.Range("A1").Resize(,4) = wsIn.Range("A1").Resize(,4).Value
     Dim rng As Range
     Set rng = wsIn.Range("A1").CurrentRegion
     wsIn.AutoFilterMode = False
@@ -76,8 +78,7 @@ Function setDisplayFormat(wsOut As Worksheet, _
     rng.AutoFilter Field:=Field, Criteria1:=Criteria1, Operator:=Operator
     Dim cnt As Integer
     cnt = rng.Columns(1).SpecialCells(xlCellTypeVisible).Count-1
-    Msgbox pos+cnt
-    rng.Offset(1).Copy Destination:=wsOut.Cells(pos+cnt, 1)
+    rng.Offset(1).Copy Destination:=wsOut.Cells(pos, 1)
 
     With wsOut.Cells(pos, Field).Resize(cnt)
         .ClearFormats
@@ -89,4 +90,4 @@ Function setDisplayFormat(wsOut As Worksheet, _
 　　　　End Select
 　　End With
     setDisplayFormat = pos+cnt
-End Sub
+End Function
