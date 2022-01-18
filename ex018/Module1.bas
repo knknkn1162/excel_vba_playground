@@ -9,7 +9,7 @@ Sub main()
         ' 非表示の名前定義は表示にする
         n.Visible = True
         Debug.Print "Name: " & n.Name & ", RefersTo: " & n.RefersTo
-        ' Escape with [<character>]
+        ' [#] escapes `#`
         If n.RefersTo Like "*[#]REF!*" Then
             deleteCnt = deleteCnt + 1
             n.Delete
