@@ -31,7 +31,7 @@ PrintEq:
 PrintNotEq:
     Msgbox "不一致"
 Release:
-    Call SetAppConfig(True)
     wb1.Close SaveChanges:=False
     wb2.Close SaveChanges:=False
+    Call SetAppConfig(True)
 End Sub
