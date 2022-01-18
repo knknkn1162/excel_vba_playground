@@ -46,7 +46,7 @@ End Function
 Sub main()
     ' create Testcase
     Dim arr0 As Variant: arr0 = 3.5
-    Dim arr1() As Variant: arr1 = Array(-1.5, 1.5, "fish", #2020/1/1#)
+    Dim arr1() As Variant: arr1 = Array(-1.5, 1.5, "1.5", #2020/1/1#)
     Dim arr2(1,3) As Variant
     Dim i As Integer, j As Integer
     For i = 0 To UBound(arr2,1)
