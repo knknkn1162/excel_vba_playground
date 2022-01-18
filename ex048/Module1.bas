@@ -1,9 +1,12 @@
 Option Explicit
 
-' True If type of v is Single or Double
-Function IsDecimal(v As variant) As String
-    Dim t As Integer: t = VarType(v)
-    IsDecimal = (t = vbSingle) Or (t = vbDouble)
+' True If type of v is Single/Double/Currency/Decimal
+Function IsDecimal(v As variant) As Boolean
+    IsDecimal = False
+    Select Case VarType(v)
+        Case vbSingle, vbDouble, vbCurrency, vbDecimal
+            IsDecimal = True
+    End Select
 End Function
 
 Sub transform1(ByRef v As Variant)
@@ -26,19 +29,24 @@ Sub transform2(ByRef v As Variant)
     Next
 End Sub
 
-Function transform(v As Variant) as Variant
-    Dim tmp As Integer
-    Dim dimension As Integer: dimension = 100
+Function GetDimension(v As Variant) As Integer
+    On Error Resume Next
+    GetDimension = 0
     Dim i As Integer
-    For i = 1 To 3
-        On Error Resume Next
-        tmp = UBound(v,i)
+    For i = 1 To 10000
+        Dim tmp As Long: tmp = UBound(v,i)
         If Err.Number <> 0 Then
-            dimension = i-1
+            GetDimension = i-1
             Err.Clear
             Exit For
         End If
     Next
+End Function
+
+Function transform(v As Variant) as Variant
+    Dim tmp As Integer
+    Dim dimension As Integer: dimension = 100
+    Dim i As Integer: dimension = GetDimension(v)
     Debug.Print "dimension = " & dimension
     Select Case dimension
         Case 1
