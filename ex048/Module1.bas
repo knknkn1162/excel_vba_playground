@@ -1,9 +1,15 @@
 Option Explicit
 
+' True If type of v is Single or Double
+Function IsDecimal(v As variant) As String
+    Dim t As Integer: t = VarType(v)
+    IsDecimal = (t = vbSingle) Or (t = vbDouble)
+End Function
+
 Sub transform1(ByRef v As Variant)
     Dim i As Integer
     For i = LBound(v,1) To Ubound(v,1)
-        If IsNumeric(v(i)) Then
+        If IsDecimal(v(i)) Then
             v(i) = Fix(v(i))
         End If
     Next
@@ -13,7 +19,7 @@ Sub transform2(ByRef v As Variant)
     Dim i,j As Integer
     For i = LBound(v,1) To Ubound(v,1)
         For j = LBound(v,2) To Ubound(v,2)
-            If IsNumeric(v(i,j)) Then
+            If IsDecimal(v(i,j)) Then
                 v(i,j) = Fix(v(i,j))
             End If
         Next
