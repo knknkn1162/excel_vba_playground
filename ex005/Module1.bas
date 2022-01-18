@@ -3,15 +3,16 @@ Option Explicit
 Sub main()
     Dim i As Integer, sr As Integer, sc As Integer
     Dim srng As Range
-    Set srng = Range("B2")
-    sr = srng.row + 1
-    sc = srng.Column
-    Columns(sc+2).NumberFormatLocal = "\#,##0"
-    For i = sr To srng.currentRegion.Rows.Count + sr - 2
-        if Cells(i, sc) = "" Or Cells(i, sc+1) = "" Then
+    Set srng = Range("B2").CurrentRegion
+    ' specify body of Column:B
+    Set srng = Intersect(srng, srng.Offset(1).Resize(,1))
+    srng.Columns(3).NumberFormatLocal = "\#,##0"
+    Dim r As Range
+    For Each r In srng
+        If r.Value = "" Or r.Offset(,1).Value = "" Then
             GoTo Continue
         End If
-        Cells(i, sc+2) = Cells(i, sc) * Cells(i, sc+1)
+        r.Offset(,2) = r.Value * r.Offset(,1).Value
 Continue:
     Next
 End Sub
