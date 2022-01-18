@@ -3,9 +3,10 @@ Option Explicit
 Sub main()
     Dim ws As Workbook
     Set ws = ThisWorkbook
-    On Error Resume Next
-    MkDir ws.Path & "/BACKUP"
-    Err.Clear
+    ' mkdir -p
+    If Dir(ws.Path & "/BACKUP", vbDirectory) = "" Then
+        MkDir ws.Path & "/BACKUP"
+    End If
 
     Dim str As String
     str = ws.Name
