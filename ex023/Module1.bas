@@ -53,3 +53,36 @@ Sub main()
     rng.ClearContents
 
 End Sub
+
+Sub SetAppConfig(ByVal b As Boolean)
+    application.screenupdating = b
+End Sub
+
+Sub main2()
+    Dim root As String: root = ThisWorkbook.Path
+    Dim str1 As String: str1 = "Book_20201101.xlsx"
+    Dim str2 As String: str2 = "Book_20201102.xlsx"
+
+    Call SetAppConfig(False)
+    Set wb2 = Workbooks.Open(root & "/ex023/" & str2)
+    Set wb1 = Workbooks.Open(root & "/ex023/" & str1)
+
+    ' If count is not match, not equal
+    If wb1.Sheets.Count <> wb2.Sheets.Count Then
+        GoTo PrintNotEq
+    End If
+    ' Assume that two workbook has the same number of sheets
+    Dim sht As Worksheet: For sht In wb2.Sheets
+        On Error Resume Next
+        Dim sht2 As Object: Set sht2 = wb1.Sheets(sht.Name)
+        Err.Clear
+        If sht2 Is Nothing Then GoTo PrintNotEq
+    Next
+
+    Call SetAppConfig(True)
+PrintEq:
+    Msgbox("一致")
+    Exit Sub
+PrintNotEq:
+    Msgbox "不一致"
+End Sub
