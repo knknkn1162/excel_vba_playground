@@ -13,14 +13,14 @@ Sub main()
         Dim pos As Integer
         pos = InStr(fname, ".")
         ' len(yyyymmddhhmm)=12
-        Dim fDate As String
+        Dim fDate As String: fDate = Mid(fname, pos-12, 8)
+        Debug.Print fDate & " vs " & prev
         ' Trash
-        fDate = Mid(fname, pos-12, 4) & "/" & Mid(fname, pos-8, 2) & "/" & Mid(fname, pos-6, 2)
         If fDate <= prev Then
             ' Killは読み取り専用は削除できない
             On Error Resume Next
             ' Msgbox "KIll " & fname
-            Kill backup_dir & "/" & fname
+            Kill backup_dir & "/" & fDate
             Err.Clear
         End If
         fname = Dir()
