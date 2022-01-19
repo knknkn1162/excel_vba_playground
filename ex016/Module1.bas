@@ -50,9 +50,7 @@ Sub main2()
     On Error Resume Next
     Set cands = Cells.SpecialCells(xlCellTypeConstants, xlTextValues)
     Err.clear
-    If cands Is Nothing Then
-        Exit Sub
-    End If
+    If cands Is Nothing Then Exit Sub
     For Each rng In cands
         Dim str As String, buf As String
         Dim v As Variant
