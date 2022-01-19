@@ -6,7 +6,7 @@ Sub main()
     d = DateAdd("yyyy",-35, d)
     Dim tbl As ListObject
     Set tbl = ActiveSheet.ListObjects(1)
-    tbl.ListColumns("備考").Range.ClearContents
+    tbl.ListColumns("備考").Range.Offset(1).ClearContents
     tbl.ShowAutoFilter = False
     ' See the link; https://excel-ubara.com/excelvba5/EXCELVBA212.html
     With tbl.DataBodyRange
