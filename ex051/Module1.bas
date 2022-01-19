@@ -25,9 +25,10 @@ Sub main()
             pos = pos + 1
             GoTo Continue
         End If
+        ' シートへのハイパーリンクでは、シングルクォートでシート名を囲まないと、記号やスペースを含むシートへのリンクが正しく機能しません。
         ws.Hyperlinks.Add Anchor:=ws.Cells(pos,1), _
             Address:="", _
-            SubAddress:=sht.Name & "!A1", _
+            SubAddress:="'" & Replace(sht.Name, "'", "''") & "'!A1", _
             TextToDisplay:=sht.Name
         ws.Cells(pos,2) = sht.PageSetup.Pages.Count
         pos = pos + 1
