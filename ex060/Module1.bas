@@ -22,11 +22,12 @@ Sub main()
                     str = Left(str, pos-1) & reg_str
             End Select
         End If
-        ' support special word
-        ' ㈱
-        str = Replace(str, ChrW(&H3231), reg_str)
-        ' ㍿
-        str = Replace(str, ChrW(&H337F), reg_str)
+        ' support special word ( c.f): https://d-toybox.com/studio/lib/romanNumerals.html)
+        ' ㍿, ㊑, ㏍, ㈱
+        Dim s As Variant
+        For Each s In Array(ChrW(&H337F), ChrW(&H3291), ChrW(&H33CD), ChrW(&H3231))
+            str = Replace(str, s, reg_str)
+        Next
         r.Value = str
     Next
 End Sub
