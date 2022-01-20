@@ -17,7 +17,9 @@ Sub main()
             arr(j) = Format(DateAdd("m", j, d), "yyyy年mm月")
         Next
         wb.Sheets(arr).copy
-        ActiveWorkbook.SaveAs dir & "/" & i & "Q.xlsx"
-        ActiveWorkbook.Close
+        ActiveWorkbook.SaveAs _
+            FielName:=dir & "/" & i & "Q.xlsx", _
+            FileFormat:=xlOpenXMLWorkbook
+        ActiveWorkbook.Close saveChanges:=False
     Next
 End Sub
