@@ -2,6 +2,7 @@ Option Explicit
 
 Sub SetAppConfig(ByVal b As Boolean)
     Application.ScreenUpdating = b
+    ' Workbook_Openを止めるにはApplication.EnableEventsをFalseにします
     Application.EnableEvents = b
 End Sub
 
@@ -12,6 +13,7 @@ Sub main()
     Dim wb As Workbook
     Set wb = Workbooks.Open(Filename:=fpath, ReadOnly:=True)
     Dim i As Integer
+    ' 他ブックのマクロを起動するには[Application.]Runを使います。
     i = Application.Run("'" & Replace(fpath,"'","''") & "'" & "!mult",3,5)
     wb.Close SaveChanges:=False
     Range("A1") = i
