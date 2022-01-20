@@ -8,7 +8,7 @@ Sub main()
     Set this_ws = Worksheets(sheetName)
     Dim pos As Long
     pos = this_ws.Range("A1").CurrentRegion.Rows.Count+1
-    data_dir = ThisWorkbook.Path & "/" & "data_ex040"
+    data_dir = ThisWorkbook.Path & "/" & "ex040_data"
     Dim fname As String
     fname = Dir(data_dir & "/*.xls")
     Dim wb As Workbook
