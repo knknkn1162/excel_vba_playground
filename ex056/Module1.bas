@@ -17,12 +17,16 @@ Sub main()
         Err.Clear
 
         For Each r In rng
-            If r.HasSpill Or r.HasArray Then
-                GoTo Continue
+            ' .Formula2 property considers spill
+            Dim prev As String: prev = r.Formula2
+            Dim cur
+            cur = Replace(r.Formula2, str, "")
+            Debug.Print prev & " -> " & r.Formula2
+            If r.HasArray Then
+                r.FormulaArray = cur
+            Else
+                r.Formula2 = cur
             End If
-            Dim prev As String: prev = r.Formula
-            r.Formula = Replace(r.Formula, str, "")
-            Debug.Print prev & " -> " & r.Formula
 Continue:
         Next
         ws.Name = origName
