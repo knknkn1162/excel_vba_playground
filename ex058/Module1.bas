@@ -30,6 +30,7 @@ Function convert(ByRef arr() As Variant, ByVal seq As Integer) As String
                     pos = pos + 1
                 Next
             End If
+            ' The last value arr(cnt+1)=-2 will be trashed
             step = 1
             prev = arr(i)
         End If
