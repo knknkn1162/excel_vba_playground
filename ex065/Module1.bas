@@ -1,7 +1,7 @@
 Option Explicit
 
 Function pad(str As String, tp As String, digit As Integer, cntmax As Integer) As String
-    Dim zeros As String: zeros = string(cntmax, "0")
+    Dim zeros As String: zeros = string$(cntmax, "0")
     Dim spaces As String: spaces = Space(cntmax)
     If tp = "N" Then
         ' 0
