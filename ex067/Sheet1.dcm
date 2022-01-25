@@ -1,0 +1,15 @@
+Option Explicit
+
+Private Sub Worksheet_Change(ByVal rng As Range)
+    Application.EnableEvents = false
+    If rng.Address <> "$F$2" Then
+        Exit Sub
+    End If
+    Columns("G:J").ClearContents
+    Range("A1").CurrentRegion.EntireColumn.AdvancedFilter _
+        CriteriaRange:=Range("F1:F2"), _
+        Action:=xlFilterCopy, _
+        CopyToRange:=Range("G1:J1")
+    UsedRange.EntireColumn.AutoFit
+    Application.EnableEvents = true
+End Sub
