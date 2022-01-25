@@ -13,6 +13,7 @@ Function zlookup(str As String, rng As Range, idx As Long, ord As Long) As Varia
     Dim i As Integer
     Dim v As Variant
     If ord = 0 Then ord = 1
+    If ord = -1 Then ord = 1
     Dim pos As Integer: pos = 0
     For i = firstrow To lastrow
         If rng.Cells(i, 1) = str Then
