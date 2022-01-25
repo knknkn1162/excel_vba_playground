@@ -14,9 +14,7 @@ Sub main()
             Err.Clear
             GoTo Continue
         End If
-        Dim str As String: str = rng.Rows(pos).Phonetic.Text
-        dws.Cells(i,1).SetPhonetic
-        dws.Cells(i,1).Phonetic.Text = str
+        dws.Cells(i,1).Phonetic.Text = rng.Rows(pos).Phonetic.Text
 Continue:
     Next
 
