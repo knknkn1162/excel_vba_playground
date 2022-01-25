@@ -1,8 +1,8 @@
 Option Explicit
 
-Function pad(str As String, tp As String, digit As Integer) As String
-    Dim zeros As String: zeros = "000000000000000000000000000000000000"
-    Dim spaces As String: spaces = Space(50)
+Function pad(str As String, tp As String, digit As Integer, cntmax As Integer) As String
+    Dim zeros As String: zeros = string(cntmax, "0")
+    Dim spaces As String: spaces = Space(cntmax)
     If tp = "N" Then
         ' 0
         pad = Right(zeros & str, digit)
@@ -32,6 +32,7 @@ Sub main()
         padding(i) = fws.Cells(pos, 2)
         cnt(i) = fws.Cells(pos, 3)
     Next
+    Dim cntmax As Integer: cntmax = WorksheetFunction.max(cnt)
 
     Dim fname As String: fname =  "out.txt"
     Dim fd as Integer: fd = FreeFile
@@ -40,7 +41,7 @@ Sub main()
     For i = 2 To rows
         Dim str As String: str = ""
         For j = 1 To cols
-            str = str & pad(ws.Cells(i,j), padding(j), cnt(j))
+            str = str & pad(ws.Cells(i,j), padding(j), cnt(j), cntmax)
         Next
         Print #fd, str
     Next
