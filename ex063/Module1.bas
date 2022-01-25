@@ -12,7 +12,7 @@ Sub main()
     End With
     Dim pos As Integer: pos = 2
     For each ws In Worksheets
-        If ws.Name = "summary" Then GoTo Continue
+        If Not ws.Name like "####年##月" Then GoTo Continue
         Dim rng As Range
         Set rng = ws.Range("A1").CurrentRegion
         Set rng = Intersect(rng, rng.Offset(1))
