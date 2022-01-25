@@ -3,31 +3,28 @@ Option Explicit
 Function zlookup(str As String, rng As Range, idx As Long, ord As Long) As Variant
     Dim firstrow As Integer: firstrow = rng.Resize(1,1).Row
     Dim lastrow As Integer: lastrow = rng.Resize(1,1).Row + rng.Rows.Count - 1
+    Dim st As Integer, en As Integer, sp As Integer
+    If ord = -1 Then
+        st = lastrow: en = firstrow: sp = -1
+    Else
+        st = firstrow: en = lastrow: sp = 1
+    End If
+
     Dim i As Integer
     Dim v As Variant
-    If ord = -1 Then
-        For i = lastrow To firstrow Step -1
-            If rng.Cells(i, 1) = str Then
+    If ord = 0 Then ord = 1
+    Dim pos As Integer: pos = 0
+    For i = firstrow To lastrow
+        If rng.Cells(i, 1) = str Then
+            pos = pos + 1
+            If pos = ord Then
                 v = rng.Cells(i,idx)
                 Exit For
             End If
-        Next
-        If IsEmpty(v) Then v = CVErr(XlErrNA)
-    Else
-        If ord = 0 Then ord = 1
-        Dim pos As Integer: pos = 0
-        For i = firstrow To lastrow
-            If rng.Cells(i, 1) = str Then
-                pos = pos + 1
-                If pos = ord Then
-                    v = rng.Cells(i,idx)
-                    Exit For
-                End If
-            End If
-        Next
-        If IsEmpty(v) And pos = 0 Then v = CVErr(XlErrNA)
-        If IsEmpty(v) Then v = ""
-    End If
+        End If
+    Next
+    If IsEmpty(v) And pos = 0 Then v = CVErr(XlErrNA)
+    If IsEmpty(v) Then v = ""
     zlookup = v
 End Function
 
