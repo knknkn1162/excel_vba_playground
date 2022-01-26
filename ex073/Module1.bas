@@ -11,6 +11,8 @@ Sub main()
         .onAction = "Test"
         .Caption = "テスト"
     End With
+    Application.DisplayAlerts = False
     wb.SaveAs wb0.Path & "/out.xlsx"
     wb.Close
+    Application.DisplayAlerts = True
 End Sub
