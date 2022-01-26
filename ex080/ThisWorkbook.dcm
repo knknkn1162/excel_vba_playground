@@ -1,14 +1,22 @@
 Option Explicit
 
 Private Sub Workbook_BeforeClose(Cancel As Boolean)
-    ThisWorkbook.Close SaveChanges:=False
+    ' consider the book as closed
+    ' Me = ThisWorkbook
+    Me.Saved = True
 End Sub
 
 Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
-    ThisWorkbook.Close SaveChanges:=False
+    Cancel = True
+    ' consider the book as closed
+    Me.Saved = True
+    If Application.Workbooks.Count > 1
+        Me.Close SaveChanges:=False
+    Else
+        Application.Quit
 End Sub
 
 Private Sub Workbook_Open()
-    ThisWorkbook.ChangeFileAccess(xlReadOnly)
+    Me.ChangeFileAccess(xlReadOnly)
 End Sub
 
