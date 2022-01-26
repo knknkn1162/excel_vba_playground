@@ -8,6 +8,10 @@ Sub main()
     Dim i As Integer
     Dim r As Range
     Do While True
+        If Cells(pos,1) = "" Then
+            pos = pos + 1
+            GoTo Continue
+        End If
         Dim rng As Range: Set rng = Cells(pos,1).CurrentRegion
         Dim cols As Integer: cols = rng.Columns.Count-2
         For Each r In Intersect(rng, rng.Columns(1).Offset(2))
@@ -21,7 +25,9 @@ Sub main()
                 WorksheetFunction.transpose(r.Offset(,2).Resize(1,cols))
             k = k + cols
         Next
-        pos = pos + rng.Rows.Count - 1 + 2
+        ' next cell
+        pos = pos + rng.Rows.Count - 1 + 1
+Continue:
         If pos > tblws.Cells(Rows.Count,1).End(xlup).Row Then
             Exit Do
         End If
