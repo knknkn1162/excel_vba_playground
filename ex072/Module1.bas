@@ -43,7 +43,7 @@ Sub main()
     Dim v As Variant
     Dim pos As Integer: pos = 1
     ' test
-    For Each v In Array("ＩＴ","と IT","itは","IT 99", "ＧＩＴ","site","It's","it is", "  it  ")
+    For Each v In Array("ＩＴ","と IT","itは","IT 99", "ＧＩＴ","site","It's","it is", "  it  ", "a    it  ", "あ    it  ")
         Dim str As String: str = v
         Cells(pos, 1) = ReplaceIT(str)
         pos = pos + 1
