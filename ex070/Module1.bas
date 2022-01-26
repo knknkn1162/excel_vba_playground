@@ -11,14 +11,12 @@ Sub stopUpdate()
 End Sub
 
 Sub main()
-    elapse = elapse + 1
+    Static dtStart As Date
+    If dtStart = 0 Then dtStart = Now()
     Call UpdateStatusBar
-    If elapse < 10 Then
+    If Now() <= dtStart + DateSerial(0,0,10) Then
         Call Application.OnTime(Now + TimeValue("00:00:01"), "main")
     Else
-        Call Application.OnTime( _
-            EarliestTime:=Now + TimeValue("00:00:01"), _
-            Procedure:="stopUpdate" _
-        )
+        Application.StatusBar = False
     End If
 End Sub
