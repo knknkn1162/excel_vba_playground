@@ -1,0 +1,17 @@
+Option Explicit
+
+Private Sub Workbook_NewSheet(ByVal Sh As Object)
+    Application.EnableEvents = False
+    Sh.Move After:= Sheets(Sheets.Count)
+    Dim str As String: str = Format(Now(), "yyyymmdd")
+    On Error Resume Next
+    Dim Sh2 As Object: Set Sh2 = Sheets(str)
+    If Err.Number <> 0 Then
+        Sh.Name = str
+    Else
+        Application.DisplayAlerts = False
+        Sh.Delete
+        Application.DisplayAlerts = True
+    End If
+    Application.EnableEvents = True
+End Sub
