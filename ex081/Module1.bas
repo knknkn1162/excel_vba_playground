@@ -23,12 +23,9 @@ Sub main()
         Dim r As Range: Set r = area.Cells(1,1)
         ' This is necessary
         r.Activate
-        Dim fl As Filter
-        Dim i As Integer
         On Error Resume Next
         ws.AutoFilter.ShowAllData
         Err.Clear
         On Error GoTo 0
-Continue:
     Next
 End Sub
