@@ -10,6 +10,9 @@ Sub btn_click(str As String)
 End Sub
 
 Sub main()
+    If TypeName(Application.Caller) <> "String" Then Exit Sub
+    Msgbox Application.Caller
+
     Dim btn As Button
     For Each btn in Worksheets(1).Buttons
         Dim addr As String: addr = btn.Caption
