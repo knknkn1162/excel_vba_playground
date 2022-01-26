@@ -6,7 +6,7 @@ Function Validate(id As String, pass As String) As Boolean
     Validate = False
     Dim idx As Integer
     On Error Resume Next
-    idx = WorksheetFunction.match(id, rng.Columns(1))
+    idx = WorksheetFunction.match(id, rng.Columns(1), 0)
     If Err.Number <> 0 Then Exit Function
     Err.Clear
     Validate = (pass = rng.Cells(idx,2))
@@ -19,7 +19,7 @@ Sub main()
         Dim pass As String
         id = inputbox("IDを入力: " & retry & "回目")
         If StrPtr(id) = 0 Then GoTo Continue
-        pass = inputbox("passを入力")
+        pass = inputbox("passを入力" & retry & "回目")
         If StrPtr(pass) = 0 Then GoTo Continue
         If Validate(id & "", pass &"") Then 
             Msgbox "validated"
