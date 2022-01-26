@@ -1,9 +1,7 @@
 Option Explicit
 
-Dim elapse As Integer
-
 Sub UpdateStatusBar()
-    Application.StatusBar = Format(Now(), "hh:mm:ss") & " " & (elapse-1) &"秒経過"
+    Application.StatusBar = Format(Now(), "hh:mm:ss") & " " & (dtStart-1) &"秒経過"
 End Sub
 
 Sub stopUpdate()
