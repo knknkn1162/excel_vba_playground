@@ -29,6 +29,7 @@ Sub main()
     Set rng = Intersect(rng, rng.Offset(1))
     Dim r As Range
     Dim pos As Integer: pos = 2
+    ' Fill A~E
     For each r In rng.Columns(1).Cells
         Dim code As String: code = r.Value()
         Dim idx As Integer
@@ -38,18 +39,15 @@ Sub main()
         pos = pos + 1
     Next
 
-    ' Fill F,G,H
+    ' Fill F,G,H(calculation
     Set rng = tws.Range("A1").CurrentRegion
     Set rng = Intersect(rng, rng.Offset(1))
     rng.Columns("F") = "=C2*D2"
     rng.Columns("G") = "=C2*E2"
     rng.Columns("H") = "=G2-F2"
 
-    Dim salesSum As Long: salesSum = WorksheetFunction.Sum(rng.Columns("G"))
-    Dim profitSum As Long: profitSum = WorksheetFunction.Sum(rng.Columns("H"))
-
-    ' Fill J and I
+    ' Fill J and I(sort)
     Set rng = tws.Range("A1").CurrentRegion
-    Call rankABC(rng, tws.Range("H1"), profitSum)
-    Call rankABC(rng, tws.Range("G1"), salesSum)
+    Call rankABC(rng, tws.Range("H1"), WorksheetFunction.Sum(rng.Columns("H")))
+    Call rankABC(rng, tws.Range("G1"), WorksheetFunction.Sum(rng.Columns("V"))
 End Sub
