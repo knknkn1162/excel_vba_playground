@@ -23,12 +23,15 @@ Sub main()
         Dim ret As Date
         ret = r.Offset(,2)
         With pay_ws
+            ' 締日
             If .Cells(idx, 2) <> "末" Then
                 If Day(ret) > Day(.Cells(idx,2)) Then
                     ret = GetFirstDay(ret, 1)
                 End If
             End If
+            ' 支払月
             ret = GetFirstDay(ret, Val(.Cells(idx,3)))
+            ' 支払日
             If .Cells(idx, 4) <> "末" Then
                 If Day(ret) > Day(.Cells(idx,4)) Then
                     ret = GetFirstDay(ret, 1)
