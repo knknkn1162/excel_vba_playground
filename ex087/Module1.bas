@@ -1,49 +1,25 @@
 Option Explicit
 
-Sub CreateFormat(st As Range, arr As Variant)
-    Dim sz As Integer: sz = UBound(arr) - LBound(arr) + 1
-    st.Offset(,1).Resize(1, sz) = arr
-    st.Offset(1).Resize(sz) = WorksheetFunction.transpose(arr)
-    With st.Resize(sz+1, sz+1)
-        .Borders.LineStyle = xlContinuous
-        .HorizontalAlignment = xlCenter
-    End With
+Function ParseDecendents(rng As Range, ByRef arr As Variant) As Variant
     Dim i As Integer
-    For i = 1 To sz
-        With st.Offset(i,i)
-            .Borders(xlDiagonalDown).LineStyle = xlContinuous
-            .ClearContents
-        End With
-    Next
-End Sub
-
-Function ParseDecendents(str As String, ByRef arr As Variant) As Variant
-    Dim i As Integer
-    Dim ret() As Boolean
+    Dim ret() As String
     ReDim ret(LBound(arr) To UBound(arr))
     For i = LBound(arr) To UBound(arr)
-        ret(i) = False
-        Dim pat As String: pat = "*'" & arr(i) & "'!*"
-        If str Like pat Then ret(i) = True
+        ret(i) = ""
+        If rng.Worksheet.Name = arr(i) Then GoTo FCon
+        Dim pat As String: pat = "*'" & Replace(arr(i), "'","''") & "'!*"
+        If Not rng.Find(What:=pat, LookIn:=xlFormulas, LookAt:=xlPart) Is Nothing Then
+            ret(i) = "〇"
+        End If
+FCon:
     Next
     ParseDecendents = ret
 End Function
 
-Sub UpdateArr(ByRef bs As Variant, tmp As Variant)
-    Dim i As Integer
-    For i = LBound(bs) To UBound(bs)
-        bs(i) = tmp(i) Or bs(i)
-    Next
-End Sub
-
-Function BoolToox(bs As Variant) As Variant
-    Dim ret() As Variant
-    ReDim ret(LBound(bs) To UBound(bs))
-    Dim i As Integer
-    For i = LBound(bs) To UBound(bs)
-        ret(i) = IIF(bs(i), "〇", "")
-    Next
-    BoolToox = ret
+Function CollectFormulaCells(ws As Worksheet) As Range
+    On Error Resume Next
+    Set CollectFormulaCells = ws.Cells.SpecialCells(XlCellTypeFormulas)
+    On Error GoTo 0
 End Function
 
 Sub main()
@@ -62,31 +38,20 @@ Sub main()
     Next
 
     Dim trng As Range: Set trng = tws.Range("B2")
+    trng.CurrentRegion.Offset(1,1).ClearContents
 
     Dim r As Range
     For i = 1 To sz
         Dim ws As Worksheet: Set ws = Worksheets(arr(i))
-        Dim rng As Range
-        Dim bs() As Boolean
+        Dim rng As Range: Set rng = CollectFormulaCells(ws)
+        Dim bs() As String
         ReDim bs(1 To sz)
-        On Error Resume Next
-        Set rng = ws.Cells.SpecialCells(XlCellTypeFormulas)
-        If Err.Number <> 0 Then
-            Err.Clear
-            On Error GoTo 0
-            GoTo Continue
+        If Not rng Is Nothing Then
+            bs = parseDecendents(rng, arr)
         End If
-        On Error GoTo 0
-        For Each r In rng
-            Dim tmp() As Boolean
-            tmp = parseDecendents(r.Formula, arr)
-            Call UpdateArr(bs, tmp)
-        Next
-Continue:
-        trng.Offset(i,1).Resize(1,sz).Value() = BoolToox(bs)
+        trng.Offset(i,1).Resize(1,sz).Value() = bs
     Next
     For i = 1 To sz
         Worksheets(arr(i)).Name = orig(i)
     Next
-    Call CreateFormat(trng, orig)
 End Sub
