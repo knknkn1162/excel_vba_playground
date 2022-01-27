@@ -36,6 +36,16 @@ Sub UpdateArr(ByRef bs As Variant, tmp As Variant)
     Next
 End Sub
 
+Function BoolToox(bs As Variant) As Variant
+    Dim ret() As Variant
+    ReDim ret(LBound(bs) To UBound(bs))
+    Dim i As Integer
+    For i = LBound(bs) To UBound(bs)
+        ret(i) = IIF(bs(i), "〇", "")
+    Next
+    BoolToox = ret
+End Function
+
 Sub main()
     Dim sz As Integer: sz = Worksheets.Count
     Dim origs() As String
@@ -75,6 +85,8 @@ Sub main()
             Call UpdateArr(bs, tmp)
         Next
 Continue:
+        Dim ss() As Variant
+        ss = BoolToox(bs)
         trng.Offset(i,1).Resize(1,sz).Value() = bs
     Next
     For i = 1 To sz
