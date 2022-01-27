@@ -85,9 +85,7 @@ Sub main()
             Call UpdateArr(bs, tmp)
         Next
 Continue:
-        Dim ss() As Variant
-        ss = BoolToox(bs)
-        trng.Offset(i,1).Resize(1,sz).Value() = bs
+        trng.Offset(i,1).Resize(1,sz).Value() = BoolToox(bs)
     Next
     For i = 1 To sz
         Worksheets(arr(i)).Name = orig(i)
