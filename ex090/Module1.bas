@@ -8,13 +8,20 @@ Function CountOverLapped(rng As Range, isDeleted As Boolean)
     Dim sp As Shape
     Dim ret As Long: ret = 0
     Dim ws As Worksheet: Set ws = ActiveSheet
+    Dim r As Range
     For Each sp In ws.Shapes
-        If sp.Type <> msoPicture Then GoTo Continue
-        If Not IsOverlapped(sp.Top, sp.Top+sp.Height, rng.Top, rng.Top+rng.Height) Then GoTo Continue
-        If Not IsOverlapped(sp.Left, sp.Left+sp.Width, rng.Left, rng.Left+rng.Width) Then GoTo Continue
-        ret = ret + 1
-        If isDeleted Then sp.Delete
-Continue:
+        If sp.Type <> msoPicture Then GoTo Continue1
+        For Each r In rng.Areas
+            If Not IsOverlapped( _
+                sp.Top, sp.Top+sp.Height, r.Top, r.Top+r.Height) Then GoTo Continue2
+            If Not IsOverlapped( _
+                sp.Left, sp.Left+sp.Width, r.Left, r.Left+r.Width) Then GoTo Continue2
+            If isDeleted Then sp.Delete
+            ret = ret + 1
+            Exit For
+Continue2:
+        Next
+Continue1:
     Next
     CountOverLapped = ret
 End Function
@@ -22,7 +29,8 @@ End Function
 Sub main()
     Range("A3") = CountOverLapped(Range("A1"), True)
     Range("A4") = CountOverLapped(Range("B3:F10"), False)
-    Range("A5") = CountOverLapped(Range("B5:C7"), True)
-    Range("A6") = CountOverLapped(Range("E4"), True)
-    Range("A7") = CountOverLapped(Range("B3:F10"), True)
+    Range("A5") = CountOverLapped(Range("B3,C6,E8"), False)
+    Range("A6") = CountOverLapped(Range("B5:C7"), True)
+    Range("A7") = CountOverLapped(Range("E4"), True)
+    Range("A8") = CountOverLapped(Range("B3:F10"), True)
 End Sub
