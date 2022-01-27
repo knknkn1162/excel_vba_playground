@@ -1,5 +1,5 @@
 Option Explicit
-Function IsOverlapped(top1 As Long, bottom1 As Long, top2 As Long, bottom2 As Long) As Boolean
+Function IsOverlapped(top1 As Double, bottom1 As Double, top2 As Double, bottom2 As Double) As Boolean
     IsOverlapped  = top1 < bottom2 And top2 < bottom1
 End Function
 
@@ -12,7 +12,7 @@ Function CountOverLapped(rng As Range, isDeleted As Boolean)
         If sp.Type <> msoPicture Then GoTo Continue
         If Not IsOverlapped(sp.Top, sp.Top+sp.Height, rng.Top, rng.Top+rng.Height) Then GoTo Continue
         If Not IsOverlapped(sp.Left, sp.Left+sp.Width, rng.Left, rng.Left+rng.Width) Then GoTo Continue
-        ret = ret + sp.Height * sp.Width
+        ret = ret + 1
         If isDeleted Then sp.Delete
 Continue:
     Next
