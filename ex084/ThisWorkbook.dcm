@@ -1,0 +1,37 @@
+Option Explicit
+
+Function parse(fn As String) As String
+    Dim pos As Integer: pos = Instr(fn, ".")
+    parse = Mid(fn, pos-12, 12)
+End Function
+
+Private Sub Workbook_BeforeSave(ByVal SaveAsUI As Boolean, Cancel As Boolean)
+    Const maxcnt As Integer = 30
+    Dim root As String: root = Me.Path & "/ex084_BACKUP"
+    On Error Resume Next
+    Mkdir root
+    On Error GoTo 0
+
+    Dim fname As String: fname = Dir(root & "/*.xls")
+    Dim oldest As String
+    oldest = Format(Now(), "yymmddhhmmss")
+    Dim cnt As Integer: cnt = 0
+    Do While fname <> ""
+        cnt = cnt + 1
+        If parse(fname) < oldest Then
+            oldest = parse(fname)
+        End If
+        fname = Dir()
+    Loop
+    If cnt >= maxcnt Then
+        Dim ofn As String
+        ofn= Replace(Me.Name, ".xlsm", "_" & oldest & ".xlsm")
+        Msgbox "kill " & ofn
+        Kill root & "/" & ofn
+    End If
+
+    Dim fn As String
+    fn = Replace(Me.Name, ".xlsm", "_" & Format(Now(), "yymmddhhmmss") & ".xlsm")
+    Msgbox "save backup: " & fn
+    Me.SaveCopyAs root & "/" & fn
+End Sub
