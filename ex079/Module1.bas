@@ -7,14 +7,13 @@ Sub main()
     Dim wdDoc As Word.Document
     Dim wpath As String: wpath = ThisWorkbook.Path & "/ex079/doc1.docx"
     Set wdDoc = wdApp.Documents.Open(wpath)
-    wdApp.Visible = True
+    wdDoc.Bookmarks("エクセル表").Select
 
     ' save as picture
     ws.Range("A1").CurrentRegion.Copy
-    wdDoc.Content.InsertAfter Text:=wb.Name & vbCrLf
-    wdDoc.Content.InsertAfter Text:=ws.Name & vbCrLf
     With wdApp.Selection
-        .EndKey Unit:=wdStory
+        .TypeText(wb.Name & vbCrLf)
+        .TypeText(ws.Name & vbCrLf)
         .PasteSpecial DataType:=wdPasteMetafilePicture
     End With
     Application.CutCopyMode = False
