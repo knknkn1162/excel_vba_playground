@@ -49,5 +49,5 @@ Sub main()
     ' Fill J and I(sort)
     Set rng = tws.Range("A1").CurrentRegion
     Call rankABC(rng, tws.Range("H1"), WorksheetFunction.Sum(rng.Columns("H")))
-    Call rankABC(rng, tws.Range("G1"), WorksheetFunction.Sum(rng.Columns("V"))
+    Call rankABC(rng, tws.Range("G1"), WorksheetFunction.Sum(rng.Columns("G")))
 End Sub
