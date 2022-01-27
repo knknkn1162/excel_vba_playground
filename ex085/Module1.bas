@@ -8,6 +8,8 @@ Sub main()
     Dim mws As Worksheet: Set mws = Worksheets("取引先マスタ")
     Dim pay_ws As Worksheet: Set pay_ws = Worksheets("支払パターン")
     Dim date_ws As Worksheet: Set date_ws = Worksheets("祝日マスタ")
+    Dim horid As Range
+    Set horid = date_ws.Range("A1").CurrentRegion.Columns(1).Offset(1)
 
     Dim rng As Range: Set rng = tws.Range("A1").CurrentRegion
     rng.Columns(4).NumberFormatLocal = "yyyy/mm/dd(aaa)"
@@ -37,14 +39,7 @@ Sub main()
             Else
                 ret = DateSerial(Year(ret), Month(ret), .Cells(idx,4))
             End If
-            Dim comp As Date: comp = ret
-            Do While True
-                If WorksheetFunction.networkdays(comp, ret) <> 0 Then
-                    ret = comp
-                    Exit Do
-                End If
-                comp = DateAdd("d", -1, comp)
-            Loop
+            ret = WorksheetFunction.workday(ret+1, -1, horid)
         End With
         r.Offset(,3) = ret
     Next
