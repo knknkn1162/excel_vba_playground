@@ -70,8 +70,9 @@ Sub main()
     Next
 
     Dim retry As Integer
+    ' it takes 10~20 sec...
     Do While True
-        nrng.Clear
+        nrng.ClearContents
         Dim ids() As Integer
         ids = Shuffle(orng.Rows.Count, orng.Columns.Count)
         Dim violatenum As Integer: violatenum = 0
@@ -86,14 +87,12 @@ Sub main()
             For j = 1 To orng.Columns.Count
                 Dim or1 As Range: Set or1 = orng.Cells(i,j)
                 Dim nr1 As Range: Set nr1 = nrng.Find(What:=or1.Value())
-                If Not IsMove(or1, nr1) Then
-                    violatenum = violatenum+1
-                End If
+                If Not IsMove(or1, nr1) GoTo Discard
             Next
         Next
-        Debug.Print violatenum
-        If violatenum = 0 Then Exit Do
-        retry = retry + 1
+        Exit Do
+Discard:
+    retry = retry + 1
     Loop
     Debug.Print "total: " & retry
 End Sub
