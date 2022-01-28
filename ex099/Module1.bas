@@ -28,9 +28,10 @@ Function Shuffle(rows As Integer, columns As Integer) As Variant
     Dim i As Integer, j As Integer, k As Integer
     Dim n1 As Integer, n2 As Integer
     Dim retry As Integer
+    Dim sz As Integer: sz = rows * columns
     Do
-        Redim ret(1 To rows*columns)
-        Redim flags(1 to rows*columns)
+        Redim ret(1 To sz)
+        Redim flags(1 to sz)
         For i = 1 To rows
             For j = 1 To columns
                 retry = 0
@@ -38,7 +39,7 @@ Function Shuffle(rows As Integer, columns As Integer) As Variant
                     retry = retry + 1
                     n1 = WorksheetFunction.RandBetween(1, rows)
                     n2 = WorksheetFunction.RandBetween(1, columns)
-                    if retry >= 200 GoTo Continue
+                    if retry >= sz*3 GoTo Continue
                 Loop While n1 = i Or n2 = j Or flags((n1-1)*columns+n2)
                 flags((n1-1)*columns + n2) = True
                 ret((i-1)*columns + j) = (n1-1)*columns + n2
@@ -57,7 +58,7 @@ Sub main()
     Dim orng As Range: Set orng = ows.Range("B5:G10")
     Dim nrng As Range: Set nrng = nws.Range("B5:G10")
 
-    Dim sz As Integer: sz = orng.Rows.Count * orng.Columns.COunt
+    Dim sz As Integer: sz = orng.Rows.Count * orng.Columns.Count
     Dim people() As String
     ReDim people(1 To sz)
     Dim i As Integer, j As Integer
@@ -75,7 +76,6 @@ Sub main()
         nrng.ClearContents
         Dim ids() As Integer
         ids = Shuffle(orng.Rows.Count, orng.Columns.Count)
-        Dim violatenum As Integer: violatenum = 0
         For i = 1 To orng.Rows.Count
             For j = 1 To orng.Columns.Count
                 pos = (i-1) * orng.Columns.Count + j
