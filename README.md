@@ -31,6 +31,15 @@ choco source add -n kai2nenobu -s https://www.myget.org/F/kai2nenobu
 choco install -y nkf make
 ```
 
+4-3: load references:
+
++ ex071: load "Microsoft PowerPoint xx.x ObjectLibrary"
+    + excel > Alt+F11(Open VBE) > tool > References > Check "Microsoft PowerPoint xx.x Object Library"
++ ex079: load "Microsoft Word xx.x ObjectLibrary"
+    + excel > Alt+F11(Open VBE) > tool > References > Check "Microsoft Word xx.x Object Library"
++ ex097, ex098: load "Microsoft ActiveX Data Objects 6.1 Library"
+    + excel > Alt+F11(Open VBE) > tool > References > Check "Microsoft ActiveX Data Objects 6.1 Library"
+
 5: Type make commands below;
 
 You can import/run macro by bash or powershell:
