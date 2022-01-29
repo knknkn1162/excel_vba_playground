@@ -6,5 +6,6 @@ Sub main()
         ' SpecialCellsは該当せるが存在しない場合はエラーとなる
         .SpecialCells(xlCellTypeConstants).ClearContents
         Err.Clear
+        On Error GoTo 0
     End With
 End Sub
