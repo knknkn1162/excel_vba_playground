@@ -39,6 +39,11 @@ choco install -y nkf make
     + excel > Alt+F11(Open VBE) > tool > References > Check "Microsoft Word xx.x Object Library"
 + ex097, ex098: load "Microsoft ActiveX Data Objects 6.1 Library"
     + excel > Alt+F11(Open VBE) > tool > References > Check "Microsoft ActiveX Data Objects 6.1 Library"
++ ex100: use
+    + download [Serenium Basic](https://github.com/florentbr/SeleniumBasic/releases/tag/v2.0.9.0)
+    + download [Chrome Driver](https://sites.google.com/chromium.org/driver/)
+    + download [Microsoft .NET Framework 3.5](https://www.microsoft.com/ja-jp/download/details.aspx?id=25150)
+    + For more information, see the [link(japanese)](https://excel-ubara.com/excelvba4/EXCEL_VBA_401.html)
 
 5: Type make commands below;
 
