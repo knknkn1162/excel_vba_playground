@@ -14,36 +14,3 @@ Sub main()
         End If
     Next
 End Sub
-
-Sub main2()
-    Dim rng As Range
-    Set rng = Range("A1").CurrentRegion
-    Set rng = Intersect(rng, rng.Offset(1,1))
-
-    Dim r As Range
-    For each r In rng.rows
-        Dim arg1 As Range
-        Set arg1 = r.resize(,5)
-        With WorksheetFunction
-            If .Sum(arg1) >= 300 And _
-                .CountIf(arg1, "<50") = 0 Then
-                r.Columns(6) = "合格"
-            End If
-        End With
-    Next
-End Sub
-
-Sub main3()
-    Dim rng As Range
-    Dim ws As Worksheet: Set ws = ActiveSheet
-    Set rng = Range("A1").CurrentRegion
-    Set rng = Intersect(rng, rng.Offset(1))
-    Dim cols As Integer: cols = rng.Columns.Count
-    ws.AutoFilterMode = False
-    ' calc condition
-    rng.Columns(cols+1) =  "=OR(COUNTIF(B2:F2, ""<50"") = 0, SUM(B2:F2) >= 350)"
-    Range("A1").AutoFilter Field:=(cols+1), Criteria1:=True
-    rng.Columns(7).SpecialCells(xlCellTypeVisible) = "合格"
-    ws.AutoFilterMode = False
-    rng.Columns(cols+1).ClearContents
-End Sub
