@@ -32,6 +32,7 @@ Sub main()
             On Error Resume Next
             Set rng = InterSect(.Cells, .SpecialCells(xlCellTypeFormulas))
             Err.Clear
+            On Error GoTo 0
         End With
         If rng Is Nothing Then Exit For
         Dim r As Range
