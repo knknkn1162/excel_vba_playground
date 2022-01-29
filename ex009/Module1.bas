@@ -1,13 +1,13 @@
 Option Explicit
 
 Sub main()
-
     Dim ws As Worksheet
     Set ws = Worksheets("成績表")
     Application.DisplayAlerts = False
     On Error Resume Next
     WorkSheets("合格者").Delete
     Err.Clear
+    On Error GoTo 0
     Application.DisplayAlerts = True
 
     Dim dst_ws As Worksheet
