@@ -1,9 +1,23 @@
 Option Explicit
 
+Sub CreateDir(d As String)
+    Dim fname As String: fname = Dir(d & "/*.*")
+    Do While fname <> ""
+        Kill d & "/" & fname
+        fname = Dir()
+    Loop
+    On Error Resume Next
+    RmDir d
+    Mkdir d
+    On Error GoTo 0
+End Sub
+
 Sub main()
     Dim i As Integer
     Dim fd as Integer: fd = FreeFile
-    Dim fpath As String: fpath = ThisWorkbook.Path & "/out.csv"
+    Dim bdir As String: bdir = ThisWorkbook.Path & "/ex043_out"
+    Call CreateDir(bdir)
+    Dim fpath As String: fpath = bdir & "/out.csv"
     Open fpath For output As #fd
     Dim box(1 To 4) As String
     For i = 1 To 4
@@ -24,22 +38,4 @@ Sub main()
     ' write as SHIFT_JIS encoding
     ' In Linux, check with `nkf --ic=SHIFT_JIS out.csv`
     Close #fd
-End Sub
-
-Sub main2()
-    Dim ws As Worksheet: Set ws = Activesheet
-    Dim wb As Workbook: Set wb = ActiveWorkbook
-    ws.Copy
-    With wb.Worksheets(1)
-        .Columns(1).NumberFormatLocal = "yyyy/mm/dd"
-        .Columns(2).NumberFormatLocal = "0"
-        .Columns(3).NumberFormatLocal = "0.00"
-    End With
-
-    Dim fpath As String
-    fpath = wb.Path & "/out.csv"
-    ' write as SHIFT_JIS encoding
-    ' In Linux, check with `nkf --ic=SHIFT_JIS out.csv`
-    wb.SaveAs FileName:=fpath, FileFormat:=xlCSV
-    wb.Close SaveChanges:=False
 End Sub
