@@ -2,6 +2,7 @@ Option Explicit
 
 Sub main()
     Dim w As Window
+    Dim sv As Object
     For each w In Windows
         w.Activate
         With w
