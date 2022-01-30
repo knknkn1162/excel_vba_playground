@@ -27,7 +27,7 @@ git clone https://github.com/knknkn1162/vba100_knock ./src
 wget https://github.com/knknkn1162/vba100_knock/releases/download/books/books.zip
 # in powershell, type: wget https://github.com/knknkn1162/vba100_knock/releases/download/books/books.zip -o books.zip -UseBasicParsing
 # unzip under ./books directory; see also `#directories` subsection.
-unzip ./vba100_books.zip -d .
+unzip -O sjis ./vba100_books.zip -d .
 # install nkf and make in Windows. See in detail; https://github.com/knknkn1162/excel_vba_skeleton
 Start-Process powershell -Verb runAs
 choco source add -n kai2nenobu -s https://www.myget.org/F/kai2nenobu
