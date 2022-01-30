@@ -13,8 +13,9 @@ Sub main()
 
         On Error Resume Next
         Set rng = ws.Cells.SpecialCells(xlCellTypeFormulas)
-        If rng Is Nothing Then GoTo Continue
         Err.Clear
+        On Error GoTo 0
+        If rng Is Nothing Then GoTo Continue
 
         For Each r In rng
             ' .Formula2 property considers spill
