@@ -13,9 +13,8 @@ End Function
 Sub main()
     Dim ws As Worksheet
     Set ws = Worksheets("ファイル一覧")
-    Cells(1,1) = "ファイル一覧"
-    Cells(1,2) = "更新日時"
-    Cells(1,3) = "サイズ"
+    ws.Cells(1,1).Resize(1,3) = _
+        Array("ファイル一覧", "更新日時", "サイズ")
     Dim searchDir As String
     Dim root As String
     root = ThisWorkbook.Path
