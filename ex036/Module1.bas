@@ -12,8 +12,7 @@ Sub main()
     For i = 1 To cols
         str = Cells(1, i)
         pos = InstrRev(str, "(")
-        Dim idx As Integer
-        idx = Val(Mid(str, pos+1))
+        Dim idx As Integer: idx = Val(Mid(str, pos+1))
         arr(idx) = i
     Next
     pos = 1
