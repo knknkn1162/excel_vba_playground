@@ -15,10 +15,8 @@ Function createDBSheet() As Worksheet
     End If
     With ws
         .Name = "売上DB"
-        .Cells(1, 1) = "部門"
-        .Cells(1, 2) = "区分"
-        .Cells(1, 3) = "日付"
-        .Cells(1, 4) = "金額"
+        .Cells(1, 1).Resize(1,4) = _
+            Array("部門", "区分", "日付", "金額")
     End With
     cur_ws.Activate
     Set createDBSheet = ws
@@ -34,11 +32,10 @@ Sub main()
     ws.Columns("C").NumberFormatLocal = Cells(1,3).NumberFormatLocal
     For i = 3 To Cells(Rows.Count, 1).End(xlUp).Row
         For j = 3 To Cells(1, Columns.Count).End(xlToLeft).Column
-            ws.Cells(pos, 1) = Cells(Int(i/2)*2, 1)
-            ws.Cells(pos, 2) = Cells(i, 2)
-            ws.Cells(pos, 3) = Cells(1, j)
-            ws.Cells(pos, 4) = Cells(i, j)
+            ws.Cells(pos,1).Resize(1,4) = _
+                Array(Cells(Int(i/2)*2, 1), Cells(i,2), Cells(1,j), Cells(i, j))
             pos = pos + 1
         Next
     Next
+    ws.UsedRange.EntireColumn.AutoFit
 End Sub
