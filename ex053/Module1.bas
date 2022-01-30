@@ -18,6 +18,7 @@ Sub main()
             Criteria1:="*男*"
         On Error Resume Next
         tbl.ListColumns("備考").Range.SpecialCells(xlCellTypeVisible) = "対象"
+        On Error GoTo 0
     End With
     tbl.AutoFilter.ShowAllData
 End Sub
