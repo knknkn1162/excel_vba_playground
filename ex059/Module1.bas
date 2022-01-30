@@ -4,10 +4,11 @@ Sub main()
     Dim ws As Worksheet
     Dim wb As Workbook: Set wb = ThisWorkbook
     Dim root As String: root = wb.Path
-    Dim dir As String: dir = root & "/ex059_wb"
+    Dim dir As String: dir = root & "/ex059_out"
     On Error Resume Next
     MkDir(dir)
-    Err.Clear
+    On Error GoTo 0
+
     Dim arr(2) As String
     Dim i As Integer, j As Integer
     Dim baseDate As Date: baseDate = #2020/04/01#
