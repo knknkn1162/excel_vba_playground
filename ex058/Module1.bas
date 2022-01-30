@@ -48,4 +48,5 @@ Sub main()
     For i = 1 To 5
         Cells(i,1) = convert(arr, i)
     Next
+    ActiveSheet.UsedRange.EntireColumn.AutoFit
 End Sub
