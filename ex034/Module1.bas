@@ -18,26 +18,12 @@ Function transpose(ByRef mat As Variant, ByVal w As Boolean) As Variant
     transpose = arr2
 End Function
 
-Function formatMatrix(ByRef mat As Variant) As String
-    Dim str As String
-    str = ""
-    Dim i As Integer, j As Integer
-    For i = 1 To UBound(mat, 1)
-        For j = 1 To UBound(mat, 2)
-            str = str & mat(i,j) & ","
-        Next
-        str = str & vbLf
-    Next
-    ' remove comma and vbLf
-    formatMatrix = Left(str, Len(str)-2)
-End Function
-
 Sub main()
     Dim arr() As Variant
     ' No need `Set`
     arr = Range("A1").CurrentRegion.Value
     ' CW
-    Msgbox formatMatrix(transpose(arr, true))
+    Range("E1").Resize(UBound(arr, 2), UBound(arr, 1)).Value = transpose(arr, true)
     ' CCW
-    Msgbox formatMatrix(transpose(arr, false))
+    Range("E6").Resize(UBound(arr, 2), UBound(arr, 1)).Value = transpose(arr, false)
 End Sub
