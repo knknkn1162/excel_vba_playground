@@ -28,6 +28,18 @@ Function NewReceipt(shtName As String) As Worksheet
     Set NewReceipt = ws
 End Function
 
+Sub CleanUp(fdir As String)
+    Dim fname As String: fname = Dir(fdir & "/*.*")
+    Do While fname <> ""
+        Kill fdir & "/" & fname
+        fname = Dir()
+    Loop
+    On Error Resume Next
+    RmDir fdir
+    MkDir fdir
+    On Error GoTo 0
+End Sub
+
 Sub main()
     Const maxcnt As Integer = 10
     Dim uws As Worksheet: Set uws = Worksheets("売上")
@@ -36,11 +48,8 @@ Sub main()
     Set rng = Intersect(rng, rng.Offset(1))
     Dim r As Range
 
-    Dim rdir As String: rdir = ThisWorkbook.Path & "/ex083"
-    On Error Resume Next
-    RmDir rdir
-    MkDir rdir
-    On Error GoTo 0
+    Dim rdir As String: rdir = ThisWorkbook.Path & "/ex083_out"
+    Call Cleanup(rdir)
 
     For Each r In rng.Columns(2).Cells
         Dim ws As Worksheet: Set ws = NewReceipt(r.Value & "_請求書")
