@@ -8,19 +8,20 @@ Private Sub Worksheet_Change(ByVal Target As Range)
     If rng Is Nothing Then Exit Sub
     Dim r As Range
     For each r In rng
-        On Error Resume Next
         ' cleanup
         r.Font.ColorIndex = xlAutomatic
         r.Offset(,1) = "": r.Offset(,3) = ""
+        On Error Resume Next
         Dim idx As Integer: idx = WorksheetFunction.match(r.Value, _
             ws.Range("A1").CurrentRegion.Columns("A"), _
             False)
-        Select Case Err.Number
+        On Error GoTo 0
+        Select Case idx
             Case 0
+                r.Font.Color = vbRed
+            Case Else
                 r.Offset(,1).Value = ws.Cells(idx,2)
                 r.Offset(,3).Value = ws.Cells(idx,3)
-            Case Else
-                r.Font.Color = vbRed
         End Select
 Continue:
     Next
