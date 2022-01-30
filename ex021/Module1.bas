@@ -5,7 +5,7 @@ Sub main()
     root = ThisWorkbook.Path
     Dim fname As String
     Dim backup_dir As String
-    backup_dir = root & "/BACKUP"
+    backup_dir = root & "/ex021_BACKUP"
     fname = Dir(backup_dir & "/")
     Dim prev As String
     prev = Format(Date()-30, "yyyymmdd")
@@ -20,8 +20,9 @@ Sub main()
             ' Killは読み取り専用は削除できない
             On Error Resume Next
             ' Msgbox "KIll " & fname
-            Kill backup_dir & "/" & fDate
+            Kill backup_dir & "/" & fname
             Err.Clear
+            On Error GoTo 0
         End If
         fname = Dir()
     loop
