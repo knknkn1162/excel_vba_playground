@@ -10,6 +10,7 @@ Sub main()
     Dim pos As Integer: pos = 2
     Do While fname <> ""
         Dim fpath As String: fpath = root & "/" & fname
+        Dim orig As Boolean: orig = Application.ScreenUpdating
         Application.ScreenUpdating = False
         Dim wb As Workbook: Set wb = Workbooks.Open(fpath)
         Dim prop As DocumentProperties: Set prop = wb.BuiltinDocumentProperties
@@ -28,7 +29,7 @@ Sub main()
         )
         
         wb.Close SaveChanges:=False
-        Application.ScreenUpdating = True
+        Application.ScreenUpdating = orig
         pos = pos +1
         fname = Dir()
         ' display up to 10
