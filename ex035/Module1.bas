@@ -6,12 +6,10 @@ Sub main()
     End With
 
     With Intersect(Range("B2").CurrentRegion, Range("E:E, G:G")).FormatConditions
-        With .Add( _
-            Type:=xlCellValue, Operator:=xlLess, Formula1:="90%")
-                .Interior.Color = vbRed
+        With .Add(Type:=xlCellValue, Operator:=xlLess, Formula1:="90%")
+            .Interior.Color = vbRed
         End With
-        With .Add( _
-            Type:=xlCellValue, Operator:=xlLess, Formula1:="100%")
+        With .Add(Type:=xlCellValue, Operator:=xlLess, Formula1:="100%")
             .Font.Color = vbRed
         End With
     End With
