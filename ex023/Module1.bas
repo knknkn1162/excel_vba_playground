@@ -2,20 +2,21 @@ Option Explicit
 
 Type AppConfig
     Calculation As Boolean
-    'DisplayAlerts As Boolean
+    DisplayAlerts As Boolean
     ScreenUpdating As Boolean
 End Type
 
 Function setAppConfig(conf As AppConfig) As AppConfig
     Dim orig As AppConfig
 　　With Application
-        conf.Calculation = .Calculation
-        'conf.DisplayAlerts = .DisplayAlerts
-        conf.ScreenUpdating = .ScreenUpdating
+        orig.Calculation = .Calculation
+        orig.DisplayAlerts = .DisplayAlerts
+        orig.ScreenUpdating = .ScreenUpdating
 　　　　.Calculation = IIf(conf.Calculation, xlCalculationAutomatic, xlCalculationManual)
-        ' .DisplayAlerts = conf.DisplayAlerts
+　　　　.DisplayAlerts = conf.DisplayAlerts
 　　　　.ScreenUpdating = conf.ScreenUpdating
 　　End With
+    setAppConfig = orig
 End Function
 
 Sub main()
@@ -26,7 +27,7 @@ Sub main()
     Dim conf As AppConfig, orig As AppConfig
     Dim ret As String
     conf.Calculation = false
-    ' conf.DisplayAlerts = false
+    conf.DisplayAlerts = false
     conf.ScreenUpdating = false
     orig = SetAppConfig(conf)
     Dim wb1 As Workbook: Set wb1 = Workbooks.Open(root & "/ex023/" & str1)

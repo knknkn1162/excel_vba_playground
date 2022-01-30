@@ -6,16 +6,17 @@ Type AppConfig
     ScreenUpdating As Boolean
 End Type
 
-Function setApp(conf As AppConfig) As AppConfig
+Function setAppConfig(conf As AppConfig) As AppConfig
     Dim orig As AppConfig
 　　With Application
-        conf.Calculation = .Calculation
-        conf.DisplayAlerts = .DisplayAlerts
-        conf.ScreenUpdating = .ScreenUpdating
+        orig.Calculation = .Calculation
+        orig.DisplayAlerts = .DisplayAlerts
+        orig.ScreenUpdating = .ScreenUpdating
 　　　　.Calculation = IIf(conf.Calculation, xlCalculationAutomatic, xlCalculationManual)
 　　　　.DisplayAlerts = conf.DisplayAlerts
 　　　　.ScreenUpdating = conf.ScreenUpdating
 　　End With
+    setAppConfig = orig
 End Function
 
 Sub main()
@@ -24,7 +25,7 @@ Sub main()
     conf.Calculation = false
     conf.DisplayAlerts = false
     conf.ScreenUpdating = false
-    Dim orig As AppConfig: orig = setApp(conf)
+    Dim orig As AppConfig: orig = setAppConfig(conf)
 
     Dim ws As Worksheet
     For Each ws In WorkSheets
@@ -51,5 +52,5 @@ Sub main()
             Application.DisplayAlerts = true
         End If
     Next
-    Call setApp(orig)
+    Call setAppConfig(orig)
 End Sub
