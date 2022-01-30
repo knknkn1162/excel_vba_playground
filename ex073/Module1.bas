@@ -12,8 +12,9 @@ Sub main()
         .onAction = "Test"
         .Caption = "テスト"
     End With
+    Dim orig As Boolean: orig = Application.DisplayAlerts
     Application.DisplayAlerts = False
     wb.SaveAs wb0.Path & "/out.xlsx"
     wb.Close
-    Application.DisplayAlerts = True
+    Application.DisplayAlerts = orig
 End Sub
