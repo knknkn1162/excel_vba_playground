@@ -3,9 +3,10 @@ Option Explicit
 Sub main()
     Dim ws As Workbook
     Set ws = ThisWorkbook
+    Dim bdir As String: bdir = ws.Path & "/ex020_BACKUP"
     ' mkdir -p
-    If Dir(ws.Path & "/BACKUP", vbDirectory) = "" Then
-        MkDir ws.Path & "/BACKUP"
+    If Dir(bdir, vbDirectory) = "" Then
+        MkDir bdir
     End If
 
     Dim str As String
