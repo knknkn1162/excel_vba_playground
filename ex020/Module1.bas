@@ -12,5 +12,5 @@ Sub main()
     Dim str As String
     str = ws.Name
     str = Replace(str, ".", "_" & Format(Now(), "yyyymmddhhmm") & ".")
-    ws.SaveCopyAs FileName:= ws.Path & "/BACKUP/" & str
+    ws.SaveCopyAs FileName:= bdir & "/" & str
 End Sub
