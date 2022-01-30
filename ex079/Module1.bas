@@ -1,11 +1,18 @@
 Option Explicit
 
+Sub Init(fpath As String)
+    On Error Resume Next
+    Kill Replace(fpath, ".docx", ".pdf")
+    On Error GoTo 0
+End Sub
+
 Sub main()
     Dim wb As Workbook: Set wb = ThisWorkbook
     Dim ws As Worksheet: Set ws = Worksheets(1)
     Dim wdApp As New Word.Application
     Dim wdDoc As Word.Document
     Dim wpath As String: wpath = ThisWorkbook.Path & "/ex079/doc1.docx"
+    Call Init(wpath)
     Set wdDoc = wdApp.Documents.Open(wpath)
     wdDoc.Bookmarks("エクセル表").Select
 
