@@ -4,7 +4,7 @@ Sub main()
     Dim rng As Range
     Set rng = Selection
     Dim d As String
-    d = inputbox("画像のpath選択")
+    d = inputbox(Prompt:="画像のpath選択", Default:="./ex029/sample.png")
     Dim root As String: root = ThisWorkbook.Path
     Dim fpath As String
     fpath = root & "/" & d
@@ -17,9 +17,10 @@ Sub main()
         Top := rng.Top, _
         Width:=-1, Height:=-1)
     shp.LockAspectRatio = msoTrue
-    'shp.Placement = xlMoveAndSize
 
-    Dim ratio As Double
+    shp.Width = rng.Width
+    shp.Height = rng.Height
+
     shp.Width = WorksheetFunction.min(rng.Width, shp.Width)
     shp.Height = WorksheetFunction.min(rng.Height, shp.Height)
     shp.Left = shp.Left + (rng.Width-shp.Width)/2
