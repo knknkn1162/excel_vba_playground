@@ -1,15 +1,34 @@
 Option Explicit
 
-Sub SetAppConfig(ByVal b As Boolean)
-    application.screenupdating = b
-End Sub
+Type AppConfig
+    Calculation As Boolean
+    'DisplayAlerts As Boolean
+    ScreenUpdating As Boolean
+End Type
+
+Function setAppConfig(conf As AppConfig) As AppConfig
+    Dim orig As AppConfig
+　　With Application
+        conf.Calculation = .Calculation
+        'conf.DisplayAlerts = .DisplayAlerts
+        conf.ScreenUpdating = .ScreenUpdating
+　　　　.Calculation = IIf(conf.Calculation, xlCalculationAutomatic, xlCalculationManual)
+        ' .DisplayAlerts = conf.DisplayAlerts
+　　　　.ScreenUpdating = conf.ScreenUpdating
+　　End With
+End Function
 
 Sub main()
     Dim root As String: root = ThisWorkbook.Path
     Dim str1 As String: str1 = "Book_20201101.xlsx"
     Dim str2 As String: str2 = "Book_20201102.xlsx"
 
-    Call SetAppConfig(False)
+    Dim conf As AppConfig, orig As AppConfig
+    Dim ret As String
+    conf.Calculation = false
+    ' conf.DisplayAlerts = false
+    conf.ScreenUpdating = false
+    orig = SetAppConfig(conf)
     Dim wb1 As Workbook: Set wb1 = Workbooks.Open(root & "/ex023/" & str1)
     Dim wb2 As Workbook: Set wb2 = Workbooks.Open(root & "/ex023/" & str2)
 
@@ -22,16 +41,18 @@ Sub main()
         On Error Resume Next
         Dim sht2 As Object: Set sht2 = wb1.Sheets(sht.Name)
         Err.Clear
+        On Error GoTo 0
         If sht2 Is Nothing Then GoTo PrintNotEq
     Next
 
 PrintEq:
-    Msgbox "一致"
+    ret = "一致"
     GoTo Release
 PrintNotEq:
-    Msgbox "不一致"
+    ret = "不一致"
 Release:
     wb1.Close SaveChanges:=False
     wb2.Close SaveChanges:=False
-    Call SetAppConfig(True)
+    Msgbox ret
+    Call SetAppConfig(orig)
 End Sub
