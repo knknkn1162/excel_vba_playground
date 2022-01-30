@@ -1,6 +1,7 @@
 # VBA 100本knock
 
 + See https://excel-ubara.com/vba100/
+    + skip [ex068](https://excel-ubara.com/vba100/VBA100_068.html) because this problem is about form-control
 + PowerShell version: [knknkn1162/vba100_knock_ps](https://github.com/knknkn1162/vba100_knock_ps)
 
 ## How to import/run macros
