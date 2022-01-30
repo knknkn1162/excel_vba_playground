@@ -24,7 +24,7 @@ cd proj
 # get this repo
 git clone https://github.com/knknkn1162/vba100_knock ./src
 # get xlsm books
-wget https://github.com/knknkn1162/vba100_knock/releases/download/test/vba100_books.zip
+wget https://github.com/knknkn1162/vba100_knock/releases/download/books/books.zip
 unzip ./vba100_books.zip -d ./src
 # install nkf and make in Windows. See in detail; https://github.com/knknkn1162/excel_vba_skeleton
 Start-Process powershell -Verb runAs
