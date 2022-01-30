@@ -27,7 +27,9 @@ Sub main()
     Dim rng As Range
     Dim pos As Integer: pos = 2
     ' copy data to thisworkbook
+    Dim orig As Boolean
     Do While fname <> ""
+        orig = Application.ScreenUpdating
         Application.ScreenUpdating = False
         Dim wb As Workbook: Set wb = Workbooks.Open(srcs & "/" & fname)
         If flag Then
@@ -42,7 +44,7 @@ Sub main()
             pos = pos + rng.Rows.Count
         Next
         wb.Close SaveChanges:=False
-        Application.ScreenUpdating = True
+        Application.ScreenUpdating = orig
         fname = Dir()
     Loop
     tws.UsedRange.EntireColumn.AutoFit
@@ -58,6 +60,8 @@ Sub main()
         tws.Range("A1").AutoFilter Field:=1, Criteria1:=comp
         Dim rs As Range: Set rs = tws.Cells.SpecialCells(xlCellTypeVisible)
         pos = pos + WorksheetFunction.Subtotal(3, tws.Range("A1").CurrentRegion.Columns(1))-1
+
+        orig = Application.ScreenUpdating
         Application.ScreenUpdating = False
         With Workbooks.Add
             With .Worksheets(1)
@@ -67,7 +71,7 @@ Sub main()
             .SaveAs dsts & "/" & comp & ".xlsx"
             .Close
         End With
-        Application.ScreenUpdating = True
+        Application.ScreenUpdating = orig
         comp = tws.Cells(pos,1)
         tws.AutoFilterMode = False
     Loop
