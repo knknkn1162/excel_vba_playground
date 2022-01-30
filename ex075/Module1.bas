@@ -7,8 +7,9 @@ Function Validate(id As String, pass As String) As Boolean
     Dim idx As Integer
     On Error Resume Next
     idx = WorksheetFunction.match(id, rng.Columns(1), 0)
-    If Err.Number <> 0 Then Exit Function
     Err.Clear
+    On Error GoTo 0
+    If idx = 0 Then Exit Function
     Validate = (pass = rng.Cells(idx,2))
 End Function
 
@@ -28,7 +29,8 @@ Sub main()
 Continue:
     Next
     Msgbox "close book"
+    Dim orig As Boolean: orig = Application.DisplayAlerts
     Application.DisplayAlerts = False
     ThisWorkbook.Close SaveChanges:=False
-    Application.DisplayAlerts = True
+    Application.DisplayAlerts = orig
 End Sub
