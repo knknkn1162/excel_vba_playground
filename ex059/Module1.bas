@@ -19,7 +19,7 @@ Sub main()
         Next
         wb.Sheets(arr).copy
         ActiveWorkbook.SaveAs _
-            FielName:=dir & "/" & i & "Q.xlsx", _
+            FileName:=dir & "/" & i & "Q.xlsx", _
             FileFormat:=xlOpenXMLWorkbook
         ActiveWorkbook.Close saveChanges:=False
     Next

@@ -5,6 +5,8 @@ Sub setLinkPicture(rng As Range, ws As Worksheet)
     ws.Range("A1").CurrentRegion.Copy
     With mws.Pictures.Paste(Link:=True)
         .ShapeRange.LockAspectRatio = True
+        .Width = rng.Width
+        .Height = rng.Height
         .Width = WorksheetFunction.min(rng.Width, .Width)
         .Height = WorksheetFunction.min(rng.Height, .Height)
         .Top = rng.Top
